@@ -1,0 +1,51 @@
+{% extends 'index.html'%}
+{% block page-content %}
+
+<div>
+
+  <script type="text/javascript" src='/static/tinymce/js/tinymce/tinymce.min.js'></script>
+    <script type="text/javascript">
+    tinymce.init({
+    selector: "textarea",
+    theme: "modern",
+    plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table contextmenu directionality",
+        "emoticons template paste textcolor colorpicker textpattern"
+    ],
+    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+    toolbar2: "print preview media | forecolor backcolor emoticons",
+    image_advtab: true,
+    templates: [
+        {title: 'Test template 1', content: 'Test 1'},
+        {title: 'Test template 2', content: 'Test 2'}
+    ]
+});
+  </script>
+
+  <form method="post" action="/bbs_sub/">
+      <h3>Title</h3>
+      <input type="text" name="title" class="form-control" placeholder=""required>
+      <hr>
+      <h3>category</h3>
+      <select name="category" class="form-control"  placeholder=""required>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+      </select>
+      <hr>
+      <h3>content</h3>
+    <textarea name="content"></textarea>
+    <hr>
+    <h3>Summary</h3>
+    <input type="text" name="summary" class="form-control" placeholder="Summary" required>
+    <br>
+    <div class="form-signin">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+    </div>
+
+  </form>
+{% endblock %}
+

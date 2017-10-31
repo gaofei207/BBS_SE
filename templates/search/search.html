@@ -1,0 +1,23 @@
+{%extends 'index.html'%}
+
+{% block page-content %}
+
+ {% if query %}
+    <h4>搜索结果如下：</h4>
+    {% for result in page.object_list %}
+        <a href="/detail/{{result.object.id}}/">{{ result.object.title }}<br></a>
+    {% empty %}
+        <p>啥也没找到</p>
+    {% endfor %}
+
+    {% if page.has_previous or page.has_next %}
+        <div>
+            {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; 上一页{% if page.has_previous %}</a>{% endif %}
+        |
+            {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}下一页 &raquo;{% if page.has_next %}</a>{% endif %}
+        </div>
+    {% endif %}
+{% endif %}
+
+
+{% endblock %}

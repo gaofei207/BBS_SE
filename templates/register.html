@@ -1,0 +1,19 @@
+<link href="/static/css/signin.css" rel="stylesheet">
+{%extends 'index.html'%}
+
+{%   block page-content%}
+<div class="container">
+
+    <form action="/acc_register/" method='POST'>
+
+        <h3 class="form-signin-heading">用户注册</h3>
+        <input type="text" name="username" class="form-control" placeholder="用户名" required>
+        <input type="password" name="password" class="form-control" placeholder="密码" required>
+        <!--<input type="text" name="email" class="form-control" placeholder="邮箱" required>-->
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+        <span style='color:red'>{{register_err}}</span>
+    </form>
+
+</div>
+{%endblock%}

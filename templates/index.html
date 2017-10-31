@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+     <style>
+        .a{
+            height:50px;
+            border:1px solid #ccc;
+            background-color:#87D300;
+        }
+    </style>
+
+    <title>Schneider_BBS</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/navbar-fixed-top.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container ">
+        <div class="navbar-header">
+          <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">-->
+            <!--<span class="sr-only">Toggle navigation</span>-->
+
+          <!--</button>-->
+          <a href="#" class="navbar-brand" style="margin:0;padding:0;"> <img src="{% static '/img/2.png' %}" alt="B11" align="top"  width="110" height="50"/></a>
+
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class=""><a href="http://127.0.0.1:8000/"><span class="glyphicon glyphicon-home"> B11员工之家</span></a></li>
+
+              {% for category in bbs_category %}
+                  {% ifequal category.id cata_id %}
+                          <li class="active"><a href="/category/{{ category.id }}/">{{ category.name }}</a></li>
+                      {% else %}
+                          <li class=""><a href="/category/{{ category.id }}/">{{ category.name }}</a></li>
+                      {% endifequal %}
+              {% endfor%}
+          </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" >
+                    {% if user.is_authenticated %}
+                        {{user.username}}
+                        {% else %}
+                        登录
+                        {% endif %}
+
+                  <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/login/">Login</a></li>
+                <li><a href="/logout/">Logout</a></li>
+              </ul>
+            </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container center-container-hx">
+      {% block page-content %}
+
+      <form action="/search/"  method='GET'>
+           <div class="input-group col-md-3" style="margin-top:0px positon:relative">
+               <input type="text" name="q" class="form-control" / >
+               <span class="input-group-btn">
+                   <button type="submit" class="btn btn-info btn-search">
+                       <span class="glyphicon glyphicon-search"></span>
+                   </button>
+               </span>
+           </div>
+      </form>
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="contents">
+        {% for bbs in bbs_list %}
+        <h4>
+          <a href="/detail/{{bbs.id}}/">{{bbs.id}}.{{bbs.title}}</a>
+        </h4>
+
+
+
+          <br>
+          {{bbs.summary}}
+           <br>
+          <br>
+
+        {% endfor %}
+
+
+      </div>
+      {% endblock %}
+
+    </div> <!-- /container -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+  </body>
+</html>
